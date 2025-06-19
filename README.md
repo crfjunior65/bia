@@ -8,4 +8,7 @@
 ```
 docker compose exec server bash -c 'npx sequelize db:migrate'
 PipeLine
+docker compose exec server bash -c 'npx sequelize db:
+migrate'
+
 ```
