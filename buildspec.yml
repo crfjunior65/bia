@@ -1,5 +1,9 @@
 version: 0.2
 
+
+env:
+  variables:
+    APP_VERSION: "1.0.0"
 phases:
   pre_build:
     commands:
@@ -7,7 +11,7 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 023770199924.dkr.ecr.us-east-1.amazonaws.com      
       - REPOSITORY_URI=023770199924.dkr.ecr.us-east-1.amazonaws.com/bia
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - IMAGE_TAG=${APP_VERSION}-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
       - echo Build iniciado em `date`
